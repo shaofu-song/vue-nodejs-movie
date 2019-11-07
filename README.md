@@ -15,7 +15,7 @@ npm run serve
 npm run build
 ```
 
-## xiaoserver
+## xiaomiserver
 ### Project setup
 ```
 npm install
@@ -27,7 +27,7 @@ npm start
 ```
 ### 项目介绍：
   * 该项目前台实现城市定位、电影列表及详情页展示、搜索框功能(需用拼音搜索)和城市部分影院列表的功能，后台实现用户注册、登陆退出、找回密码、
-邮箱发送验证码、及上传图片的功能，后台管理界面实现冻结用户(无法登录)和删除用户数据功能。
+邮箱发送验证码、及上传图片的功能，后台管理界面实现冻结用户(使其无法登录)和删除用户数据功能。
 ### 实现技术：
   **前后端分离式开发**
   *  一. 前台
@@ -38,8 +38,7 @@ npm start
       * 5.封装better-scroll和loading组件实现上拉加载和正在加载效果。
       * 6.城市页面右侧实现了地址索引功能。
       * 7.封装注册页面的验证码倒计时函数。
-  * 二. 后台
-    **MVC模式开发*
+  * 二. 后台  （MVC模式开发）
       * 1.使用express-generator生成项目。
       * 2.使用express中的router中间件开发后台数据接口路由，并使用postman工具测试接口。
       * 3.使用MongoDB持久化用户数据，使用mongoose第三方包设计数据模型并存储数据。
@@ -65,22 +64,69 @@ npm start
     头部信息/xiaomi，应该是/xiaomi/admin
    * 六. 注意事项：
       * 登陆管理员账号：用户名(admin)、密码(admin)，登陆后进入第二个链接便可进入管理后台页面。
-        **链接**
+      *  **链接**
           * http://47.104.149.241:88/xiaomi
           * http://47.104.149.241:88/xiaomi/admin
 ### 数据API接口：
-    ####api
-      * 正在热映
-          * http://39.97.33.178/api/movieOnInfoList?cityId=10
-      * 即将上映
-          * http://39.97.33.178/api/movieComingList?cityId=10
-      * 搜索
-          * http://39.97.33.178/api/searchList?cityId=10&kw=a
-      * 城市
-          * http://39.97.33.178/api/cityList
-      * 电影详情
-          * http://39.97.33.178/api/detailmovie?movieId=345808
-      * 影院
-          * http://39.97.33.178/api/cinemaList?cityId=10
-      * 城市定位
-          * http://39.97.33.178/api/getLocation
+ * **api**
+   * 正在热映
+     * http://39.97.33.178/api/movieOnInfoList?cityId=10
+   * 即将上映
+     * http://39.97.33.178/api/movieComingList?cityId=10
+   * 搜索
+     * http://39.97.33.178/api/searchList?cityId=10&kw=a
+   * 城市
+     * http://39.97.33.178/api/cityList
+   * 电影详情
+     * http://39.97.33.178/api/detailmovie?movieId=345808
+   * 影院
+     * http://39.97.33.178/api/cinemaList?cityId=10
+   * 城市定位
+     * http://39.97.33.178/api/getLocation
+ * **api2**
+   * 用户登陆
+     * 请求方法：post 
+     * 请求参数：username , password , verifyImg
+     * 请求地址：http://47.104.149.241:88/api2/users/getUser 
+   * 用户注册
+     * 请求方法：post 
+     * 请求参数：username , password , email , verify
+     * 请求地址：http://47.104.149.241:88/api2/users/register
+   * 邮箱下验证码
+     * 请求方法：get 
+     * 请求参数：email
+     * 请求地址：http://47.104.149.241:88/api2/users/verify?email=""
+   * 用户退出
+     * 请求方法：get 
+     * 请求参数：session中
+     * 请求地址：http://47.104.149.241:88/api2/users/logout
+   * 获取用户信息
+     * 请求方法：get 
+     * 请求参数：session中
+     * 请求地址：http://47.104.149.241:88/api2/users/getUser
+   * 找回密码
+     * 请求方法：post 
+     * 请求参数：email , password , verify
+     * 请求地址：http://47.104.149.241:88/api2/users/findPassword
+   * 登陆时图片验证码
+     * 请求方法：get 
+     * 请求参数：
+     * 请求地址：http://47.104.149.241:88/api2/users/verifyImg
+   * 上传图片
+     * 请求方法：post 
+     * 请求参数：param , config
+     * 请求地址：http://47.104.149.241:88/api2/users/uploadUserHead
+   * 获取数据库用户信息
+     * 请求方法：get 
+     * 请求参数：需要admin登陆状态
+     * 请求地址：http://47.104.149.241:88/api2/admin/usersList
+   * 冻结用户
+     * 请求方法：post 
+     * 请求参数：email , isFreeze
+     * 请求地址：http://47.104.149.241:88/api2/admin/updateFreeze
+   * 删除用户
+     * 请求方法：post 
+     * 请求参数：email 
+     * 请求地址：http://47.104.149.241:88/api2/admin/deleteUser
+     
+
